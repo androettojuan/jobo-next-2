@@ -14,42 +14,34 @@ const HomePage = () => {
         <CategoryButton
           key={1}
           profession={"Traductor"}
-          color="#004346"
         />
         <CategoryButton
           key={1}
           profession={"Limpieza"}
-          color="#508991"
         />
         <CategoryButton
           key={1}
           profession={"Plomero"}
-          color="#004346"
         />
         <CategoryButton
           key={1}
           profession={"Cerrajero"}
-          color="#508991"
         />
         <CategoryButton
           key={1}
           profession={"Electricista"}
-          color="#004346"
         />
         <CategoryButton
           key={1}
           profession={"Pintor"}
-          color="#508991"
         />
         <CategoryButton
           key={1}
           profession={"Jardinero"}
-          color="#004346"
         />
         <CategoryButton
           key={1}
           profession={"Albañil"}
-          color="#508991"
         />
       </div>
     </div>

@@ -84,9 +84,9 @@ const icons = [
   },
 ];
 
-const CategoryButton = ({ onClick, profession, color }) => {
+const CategoryButton = ({ onClick, profession }) => {
   return (
-    <div className={`bg-[${color}] flex flex-col w-full p-3 rounded-xl items-center`} onClick={onClick}>
+    <div className={`bg-[#508991] flex flex-col w-full p-3 rounded-xl items-center`} onClick={onClick}>
       <span className="text-[#fff] font-normal text-lg mb-1">{profession}</span>
       <Image width={42} height={42} src={
         icons.find((icon) => icon.name === profession)?.icon

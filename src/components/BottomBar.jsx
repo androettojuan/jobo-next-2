@@ -29,26 +29,18 @@ const pagesList = [
 
 const BottomBar = () => {
 
-
   return (
-    <div>
-      {pagesList
-        .filter((page) => {
-          if (page.show === "admin") {
-            return false;
-          }
-          return true;
-        })
-        .map(({ icon: IconComponent, page, name, label }) => (
-          <a
-            selected={page}
-            key={name}
-            href="/"
-          >
-            <IconComponent />
-            <span>{label}</span>
-          </a>
-        ))}
+    <div className="flex flex-row justify-between ">
+      {pagesList.map(({ icon: IconComponent, page, name, label }) => (
+        <a
+          className="flex flex-col items-center justify-center w-full h-20 text-gray-500 hover:text-[#09BC8A]"
+          selected={page}
+          key={name}
+        >
+          <IconComponent className="text-4xl " />
+          <span className="text-xl">{label}</span>
+        </a>
+      ))}
     </div>
   );
 };
