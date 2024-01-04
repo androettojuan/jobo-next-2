@@ -33,11 +33,11 @@ const BottomBar = () => {
     <div className="flex flex-row justify-between ">
       {pagesList.map(({ icon: IconComponent, page, name, label }) => (
         <a
-          className="flex flex-col items-center justify-center w-full h-20 text-gray-500 hover:text-[#09BC8A]"
+          className="flex flex-col items-center justify-center w-full h-20 text-gray-500 hover:text-[#09BC8A] cursor-pointer"
           selected={page}
           key={name}
         >
-          <IconComponent className="text-4xl " />
+          <IconComponent className="text-3xl" />
           <span className="text-xl">{label}</span>
         </a>
       ))}
