@@ -9,7 +9,7 @@ const HomePage = () => {
         <Image width={140} height={56} src="/img/JOBO.png" alt="logo" />
         <FaUserCircle className="text-4xl" />
       </div>
-      <h4 className="text-start text-2xl font-bold mt-20">Categorias</h4>
+      <h4 className="text-start text-2xl font-bold mt-20 mb-4">Categorias</h4>
       <div className="grid gap-2 grid-cols-3">
         <CategoryButton
           key={1}

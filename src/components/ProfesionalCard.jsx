@@ -16,7 +16,7 @@ const ProfesionalCard = ({
       <Image className="rounded-tl-2xl rounded-bl-2xl object-cover" width={110} height={90} src={photo} alt="foto profesional" />
       <div className="flex flex-row justify-between w-full p-2 px-4">
         <div className="flex flex-col items-start ">
-          <span className="font-bold text-xl mb-1 ">{name}</span>
+          <span className="font-bold text-xl mb-1 text-start">{name}</span>
           <span className="font-normal text-xl">{profession}</span>
         </div>
         <div className="flex flex-col items-end justify-between">

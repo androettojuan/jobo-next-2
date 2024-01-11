@@ -37,8 +37,8 @@ const BottomBar = () => {
           selected={page}
           key={name}
         >
-          <IconComponent className="text-3xl" />
-          <span className="text-xl">{label}</span>
+          <IconComponent className="text-2xl" />
+          <span className="text-lg">{label}</span>
         </a>
       ))}
     </div>
