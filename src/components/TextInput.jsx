@@ -19,7 +19,7 @@ const TextInput = ({
       <label className="flex flex-col items-start font-bold text-lg pb-6 w-full relative">
         {label}
         <input
-        className="p-4 rounded-full text-gray-400 font-normal w-full"
+        className="p-4 rounded-full text-black-600 font-normal w-full"
           type={type}
           name={name}
           value={value}
