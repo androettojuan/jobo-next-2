@@ -2,6 +2,7 @@ import React from "react";
 import { FiHome } from "react-icons/fi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiOutlineComment } from "react-icons/ai";
+import Link from "next/link";
 
 const pagesList = [
   {
@@ -32,14 +33,15 @@ const BottomBar = () => {
   return (
     <div className="flex flex-row justify-between ">
       {pagesList.map(({ icon: IconComponent, page, name, label }) => (
-        <a
+        <Link
           className="flex flex-col items-center justify-center w-full h-20 text-gray-500 hover:text-[#09BC8A] cursor-pointer"
           selected={page}
+          href={page}
           key={name}
         >
           <IconComponent className="text-2xl" />
           <span className="text-lg">{label}</span>
-        </a>
+        </Link>
       ))}
     </div>
   );

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const icons = [
@@ -84,14 +85,14 @@ const icons = [
   },
 ];
 
-const CategoryButton = ({ onClick, profession }) => {
+const CategoryButton = ({ href, profession }) => {
   return (
-    <div className={`bg-[#508991] flex flex-col w-full p-3 rounded-xl items-center`} onClick={onClick}>
+    <Link className={`bg-[#508991] flex flex-col w-full p-3 rounded-xl items-center`} href={href}>
       <span className="text-[#fff] font-normal text-md mb-1">{profession}</span>
       <Image width={42} height={42} src={
         icons.find((icon) => icon.name === profession)?.icon
       } alt="icon" />
-    </div>
+    </Link>
   );
 };
 

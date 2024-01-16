@@ -14,34 +14,42 @@ const HomePage = () => {
         <CategoryButton
           key={1}
           profession={"Traductor"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Limpieza"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Plomero"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Cerrajero"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Electricista"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Pintor"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Jardinero"}
+          href={"/profession"}
         />
         <CategoryButton
           key={1}
           profession={"Albañil"}
+          href={"/profession"}
         />
       </div>
     </div>
