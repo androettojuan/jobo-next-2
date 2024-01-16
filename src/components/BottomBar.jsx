@@ -14,7 +14,7 @@ const pagesList = [
   },
   {
     icon: AiOutlineHeart,
-    page: "/favorites",
+    page: "/favorite",
     name: "favoritos",
     show: "not-admin",
     label: "Favoritos",
