@@ -1,5 +1,6 @@
 import CategoryButton from "@/components/CategoryButton";
 import Image from "next/image";
+import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 
 const HomePage = () => {
@@ -7,7 +8,9 @@ const HomePage = () => {
     <div>
       <div className="flex justify-between items-center mt-2 pl-3 pr-3">
         <Image width={140} height={56} src="/img/JOBO.png" alt="logo" />
-        <FaUserCircle className="text-4xl" />
+        <Link href="/account">
+          <FaUserCircle className="text-4xl" />
+        </Link>
       </div>
       <h4 className="text-start text-2xl font-bold mt-20 mb-4">Categorias</h4>
       <div className="grid gap-2 grid-cols-3">
