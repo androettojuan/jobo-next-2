@@ -15,11 +15,11 @@ const TextInput = ({
   type = "text",
 }) => {
   return (
-    <div className="relative flex items-center justify-center ">
+    <div className="relative flex items-center justify-center">
       <label className="flex flex-col items-start font-bold text-lg pb-6 w-full relative">
         {label}
         <input
-        className="p-4 rounded-full text-black-600 font-normal w-full"
+        className="p-4 rounded-full text-black-600 font-normal w-full shadow-md bg-stone-200"
           type={type}
           name={name}
           value={value}

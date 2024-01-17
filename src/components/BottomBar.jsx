@@ -34,7 +34,7 @@ const BottomBar = () => {
     <div className="flex flex-row justify-between ">
       {pagesList.map(({ icon: IconComponent, page, name, label }) => (
         <Link
-          className="flex flex-col items-center justify-center w-full h-20 text-gray-500 hover:text-[#09BC8A] cursor-pointer"
+          className="flex flex-col items-center justify-center w-full h-20 text-gray-500 hover:text-emerald-600 cursor-pointer"
           selected={page}
           href={page}
           key={name}

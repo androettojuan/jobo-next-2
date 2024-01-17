@@ -87,8 +87,8 @@ const icons = [
 
 const CategoryButton = ({ href, profession }) => {
   return (
-    <Link className={`bg-[#508991] flex flex-col w-full p-3 rounded-xl items-center`} href={href}>
-      <span className="text-[#fff] font-normal text-md mb-1">{profession}</span>
+    <Link className={`bg-teal-600 flex flex-col w-full p-3 rounded-xl items-center`} href={href}>
+      <span className="text-white font-normal text-md mb-1">{profession}</span>
       <Image width={42} height={42} src={
         icons.find((icon) => icon.name === profession)?.icon
       } alt="icon" />

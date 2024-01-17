@@ -24,7 +24,7 @@ const ProfesionalCard = ({
             {favorite ? <AiFillHeart /> : <AiOutlineHeart />}
           </div>
           <div className="flex flex-row items-center">
-            <div className="text-[#FFCF26] text-2xl mr-1">
+            <div className="text-amber-400 text-2xl mr-1">
               <AiFillStar />
             </div>
             <span className="font-normal text-xl">{rating}</span>
