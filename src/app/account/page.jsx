@@ -2,15 +2,87 @@
 import AccountName from "@/components/AccountName";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import InputSwitch from "@/components/InputSwitch";
+import Select from "@/components/Select";
 import TextInput from "@/components/TextInput";
 import UserPhoto from "@/components/UserPhoto";
-import { useState } from "react";
+import { useUserData } from "@/utils/userData";
+import React, { useEffect, useState } from "react";
 import { FiCheck, FiEdit3 } from "react-icons/fi";
 
+
 const AccountPage = () => {
+    const user = useUserData();
     const [editar, setEditar] = useState(false);
-    const [name, setName] = useState("");
-    const [lastname, setLastname] = useState("");
+    const [name, setName] = useState(user?.name);
+    const [lastname, setLastname] = useState(user?.lastname);
+    const displayName = name + " " + lastname;
+    const [phone, setPhone] = useState(user?.phone);
+    const [jobs, setJobs] = useState([]);
+    const [jobId, setJobId] = useState(user?.job_id);
+    const [profession, setProfession] = useState("");
+    const [description, setDescription] = useState(user?.description);
+    const [active, setActive] = useState(user?.is_active === 1 ? true : false);
+    const [show, setShow] = useState(false);
+    const [comments, setComments] = useState([]);
+    const token = localStorage.getItem("token");
+
+    async function getJobs() {
+        const response = await fetch("http://localhost:8080/jobs");
+        const data = await response.json();
+        setJobs(data);
+    }
+
+    async function updateUser(
+        name_1,
+        lastname_1,
+        phone_1,
+        description_1,
+        job_1,
+        id_1
+    ) {
+        await fetch("http://localhost:8080/user/" + id_1, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({
+                name: name_1,
+                lastname: lastname_1,
+                phone: phone_1,
+                job_id: job_1,
+                description: description_1,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data) {
+                    alert("Usuario actualizado");
+                } else {
+                    alert("Error al actualizar");
+                }
+            });
+    }
+
+    async function disableUser(id, active_1) {
+        await fetch("http://localhost:8080/user/active/" + id, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+            body: JSON.stringify({
+                is_active: active_1,
+            }),
+        }).then((response) => response.json());
+    }
+
+    async function getJob(jobId) {
+        const response = await fetch("http://localhost:8080/job/" + jobId);
+        const data = await response.json();
+        setProfession(data[0].title);
+    }
 
     const iconSelect = () => {
         if (editar === false) {
@@ -37,6 +109,20 @@ const AccountPage = () => {
         }
     };
 
+    async function getComments() {
+        const response = await fetch("http://localhost:8080/comments");
+        const data = await response.json();
+        setComments(data);
+    }
+
+    useEffect(() => {
+        if (jobId) {
+            getJob(jobId);
+        }
+        getJobs();
+        getComments();
+    }, [jobId]);
+
     return (
         <div>
             <Header
@@ -51,50 +137,174 @@ const AccountPage = () => {
                     },
                 ]}
             ></Header>
-            <UserPhoto url="data:image/jpeg;base64,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" />
-            <div>
-                {editar ? (
-                    <>
+            {!user?.is_profesional ? (
+                <div>
+                    <UserPhoto url="data:image/jpeg;base64,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" />
+                    <div>
+                        {editar ? (
+                            <>
+                                <TextInput
+                                    disabled={!editar}
+                                    name={displayName || ""}
+                                    value={displayName || ""}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Nombre"
+                                ></TextInput>
+                                <TextInput
+                                    disabled={!editar}
+                                    name={displayName || ""}
+                                    value={displayName || ""}
+                                    onChange={(e) => setLastname(e.target.value)}
+                                    placeholder="Apellido"
+                                ></TextInput>
+                            </>
+                        ) : (
+                            <AccountName name={displayName || ""}></AccountName>
+                        )}
+                    </div>
+                    <div>
                         <TextInput
-                            disabled={!editar}
-                            name={name|| ""}
-                            value={name || ""}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="Nombre"
+                            label={"Email"}
+                            disabled={true}
+                            value={user?.email || ""}
+                        ></TextInput>
+                    </div>
+                    <div>
+                        <Button
+                            size="large"
+                            color="grey"
+                            onClick={() => {
+                                localStorage.removeItem("token");
+                                localStorage.removeItem("userId");
+                            }}
+                        >
+                            Cerrar sesion
+                        </Button>
+                    </div>
+                </div>
+            ) : (
+                <div>
+                    <UserPhoto url={user.photo} />
+                    <div>
+                        {editar ? (
+                            <>
+                                <TextInput
+                                    disabled={!editar}
+                                    name={name || ""}
+                                    value={name || ""}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Nombre"
+                                ></TextInput>
+                                <TextInput
+                                    disabled={!editar}
+                                    name={lastname || ""}
+                                    value={lastname || ""}
+                                    onChange={(e) => setLastname(e.target.value)}
+                                    placeholder="Apellido"
+                                ></TextInput>
+                                <Select
+                                    name={profession || ""}
+                                    value={jobId || ""}
+                                    onChange={(e) => {
+                                        setJobId(parseInt(e.target.value));
+                                    }}
+                                    options={jobs}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <AccountName
+                                    name={displayName || ""}
+                                    Profession={profession || ""}
+                                    admin
+                                ></AccountName>
+                                {/* <Ratings
+                      rating={
+                        comments?.filter(
+                          (comment) => comment.user_admin_id === user.id
+                        ).length > 0
+                          ? (
+                              comments
+                                .filter(
+                                  (comment) =>
+                                    comment.user_admin_id === user.id
+                                )
+                                .map((comment) => comment.rating)
+                                .reduce((a, b) => a + b) /
+                              comments.filter(
+                                (comment) => comment.user_admin_id === user.id
+                              ).length
+                            ).toFixed(1)
+                          : "Sin calificar"
+                      }
+                    /> */}
+                            </>
+                        )}
+                    </div>
+                    <div>
+                        {editar ? (
+                            <TextInput
+                                disabled={!editar}
+                                name={description}
+                                value={description || ""}
+                                onChange={(e) => setDescription(e.target.value)}
+                                placeholder="Descripcion"
+                            ></TextInput>
+                        ) : (
+                            //   <DescriptionAdmin>{description || ""}</DescriptionAdmin>
+                            <div>{description || ""}</div>
+                        )}
+                    </div>
+                    <div>
+                        <TextInput
+                            label={"Email"}
+                            disabled={true}
+                            value={user.email || ""}
                         ></TextInput>
                         <TextInput
+                            label={"Teléfono"}
+                            value={phone || ""}
                             disabled={!editar}
-                            name={lastname || ""}
-                            value={lastname || ""}
-                            onChange={(e) => setLastname(e.target.value)}
-                            placeholder="Apellido"
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder="Telefono"
                         ></TextInput>
-                    </>
-                ) : (
-                    <AccountName name={"Juan Manuel Androetto"} Profession={"Gasista"}></AccountName>
-                )}
-            </div>
-            <div>
-                <TextInput
-                    label={"Email"}
-                    disabled={true}
-                    value={"juan.androetto36@gmail.com"}
-                ></TextInput>
-            </div>
-            <div className="mt-10">
-                <Button
-                    size="1/3"
-                    grey={true}
-                    onClick={() => {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("userId");
-                        navigate("/");
-                    }}
-                >
-                    Cerrar sesion
-                </Button>
-            </div>
-        </div>
+                    </div>
+                    <div>
+                        <InputSwitch
+                            label={"Desactivar cuenta"}
+                            textAlert={
+                                "Si desactivas tu cuenta, tu perfil ya no estará disponible para que otras personas lo encuentren"
+                            }
+                            active={active}
+                            show={show}
+                            onClick={async () => {
+                                setActive(!active);
+                                setShow(!show);
+                                await disableUser(user.id, 1);
+                            }}
+                            disabled={async () => {
+                                await disableUser(user.id, 0);
+                                setActive(false);
+                                setShow(false);
+                            }}
+                        />
+                    </div>
+                    <div>
+                        <Button
+                            size="large"
+                            color="grey"
+                            onClick={() => {
+                                localStorage.removeItem("token");
+                                localStorage.removeItem("userId");
+                            }}
+                        >
+                            Cerrar sesion
+                        </Button>
+                    </div>
+                </div>
+            )}
+
+        </ div>
     );
 };
 
